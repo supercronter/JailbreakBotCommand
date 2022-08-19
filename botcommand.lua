@@ -189,7 +189,6 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 	local Msg = object.Message
 	local Sender = object.FromSpeaker
 	wait(0.5)
-	SendMessage(webhookURLs["chatlog"], "["..Sender.."]"..Msg, "ChatLog")
 	if Sender == bot.Name then
 		return
 	end
