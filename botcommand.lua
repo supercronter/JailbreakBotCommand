@@ -200,7 +200,8 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 
 		local PlayerCmd
 		local Cmd = {}
-
+		print("Hello")
+		print(Msg)
 		Cmd = string.split(Msg, " ")
 		PlayerCmd = string.lower(Cmd[1])
 		
