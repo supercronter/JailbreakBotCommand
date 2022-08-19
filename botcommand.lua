@@ -377,7 +377,7 @@ for i, plr in pairs(Players:GetChildren()) do
 	NewFrame.Name = plr.Name
 	NewFrame.Visible = true
 	NewFrame.MouseButton1Down:Connect(function()
-		SelectedPlayer = plr
+		SelectedPlayer = plr.Name
 		print(SelectedPlayer.Name)
 	end)
 end
@@ -417,6 +417,11 @@ userinput.InputBegan:Connect(function(key)
 end)
 
 ViewButton.MouseButton1Down:Connect(function()
+	if not SelectedPlayer then
+		print("Player nil")
+		return
+	end
+	print(SelectedPlayer)
 	local Character = Player.Character
 
 	local cam = game:GetService("Workspace").CurrentCamera
