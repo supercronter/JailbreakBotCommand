@@ -302,6 +302,7 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 		
 		if Cmd[1] == "/kill" then
 			local FoundPlayer = Players:FindFirstChild(Cmd[2])
+			print(Cmd[2])
 			if not FoundPlayer then
 				Chat("Player Not Found Please Check If You Typed The Name Correctly")
 				return
