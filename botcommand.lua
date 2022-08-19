@@ -201,7 +201,7 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 		local PlayerCmd
 		local Cmd = {}
 
-		Cmd = string.split(PlayerCmd, " ")
+		Cmd = string.split(Msg, " ")
 		PlayerCmd = string.lower(Cmd[1])
 		
 		if Cmd[1] == "/report" then
