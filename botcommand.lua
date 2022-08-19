@@ -213,7 +213,7 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 			end
 			Reports[Sender] = Message
 			
-			game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Please Note That You Can Only Report Players That are AutoRobbing, AutoKilling Or Killing With Hacks.", "All")
+			game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Please Note That You Can Only Report Players That are AutoRobbing, KillAura Or Using Hacks To Kill", "All")
 			wait()
 			game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("If You Misuse The Report Command or False Report You Will Be Temporarily or Permanently Ban From The Server.", "All")
 			wait()
