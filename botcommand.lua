@@ -98,7 +98,7 @@ OriFrame.Visible = false
 local HttpService = game:GetService("HttpService");
 local bot = Players.LocalPlayer
 function SendMessage(Webhook, Message, Botname)
-	local S, E = pcall(function()
+	spawn(function()
 		if not string.find(Webhook, "https://discordapp.com/api/webhooks/") then
 			return error("Send a valid URL");
 		end
@@ -213,7 +213,7 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 			end
 			Reports[Sender] = Message
 			
-			game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Please Note That You Can Only Report Players That are AutoRobbing, KillAura Or Using Hacks To Kill", "All")
+			game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Please Note That You Can Only Report Players That are AutoRobbing, KillAura Or Using Hacks The Kill.", "All")
 			wait()
 			game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("If You Misuse The Report Command or False Report You Will Be Temporarily or Permanently Ban From The Server.", "All")
 			wait()
