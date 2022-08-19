@@ -301,7 +301,7 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 		end
 		
 		if Cmd[1] == "/kill" then
-			local FoundPlayer = Player:FindFirstChild(Cmd[2])
+			local FoundPlayer = Players:FindFirstChild(Cmd[2])
 			if not FoundPlayer then
 				Chat("Player Not Found Please Check If You Typed The Name Correctly")
 				return
@@ -391,7 +391,7 @@ Players.PlayerAdded:Connect(function(plr)
 	NewFrame.Name = plr.Name
 	NewFrame.Visible = true
 	NewFrame.MouseButton1Down:Connect(function()
-		SelectedPlayer = plr
+		SelectedPlayer = plr.Name
 		print(SelectedPlayer.Name)
 	end)
 end)
@@ -421,7 +421,7 @@ ViewButton.MouseButton1Down:Connect(function()
 
 	local cam = game:GetService("Workspace").CurrentCamera
 	
-	cam.CameraSubject = game:GetService("Players").SelectedPlayer.Character.HumanoidRootPart
+	cam.CameraSubject = game:GetService("Players")[SelectedPlayer].Character.HumanoidRootPart
 end)
 
 
