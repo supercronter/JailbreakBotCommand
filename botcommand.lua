@@ -201,9 +201,9 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 		local PlayerCmd
 		local Cmd = {}
 
-
-		PlayerCmd = string.lower(Msg)
 		Cmd = string.split(PlayerCmd, " ")
+		PlayerCmd = string.lower(Cmd[1])
+		
 		if Cmd[1] == "/report" then
 			local Message = "["..Sender.."]".." Report: "..Cmd[2].." Reason: "..Cmd[3]
 			local PlayerFound = Players:FindFirstChild(Cmd[2])
