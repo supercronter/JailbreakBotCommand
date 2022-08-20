@@ -189,6 +189,7 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 	local Msg = object.Message
 	local Sender = object.FromSpeaker
 	wait(0.5)
+	SendMessage(webhookURLs["chatlog"], "["..Sender.."]"..Msg, "ChatLog")
 	if Sender == bot.Name then
 		return
 	end
@@ -290,9 +291,11 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 			for i, itemname in pairs(ItemList) do
 				wait()
 				if i == Cmd[2] then
+					Chat("loop give set")
 					LoopGive[Sender] = itemname
 					break
 				end
+				print("item Not Found")
 			end
 		end
 
