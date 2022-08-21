@@ -345,7 +345,7 @@ end)
 spawn(function()
 	while true do
 		wait(0.1)
-		spawn(function()
+		local S,E = pcall(function()
 			for Player, Item in pairs(LoopGive) do
 				wait(0.1)
 				local command = "give "..Player.." "..Item
@@ -381,11 +381,8 @@ spawn(function()
 
 				end
 			end
-
 		end)
 		
-		
-
 	end
 end)
 
