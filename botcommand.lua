@@ -182,6 +182,13 @@ for i, v in pairs(ItemList) do
 		ItemListRespone = ItemListRespone..i..", "
 	end
 end
+
+local Whitelisted_Players ={
+	["supercronter2"] = true,
+	["supercronter4"] = true,
+	["GTVAND12"] = true
+}
+
 local connection
 
 local event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents
@@ -206,6 +213,9 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 		PlayerCmd = string.lower(Cmd[1])
 		
 		if Cmd[1] == "/report" then
+			if not Cmd[2] then
+				return
+			end
 			local Message = "["..Sender.."]".." Report: "..Cmd[2].." Reason: "..Cmd[3]
 			local PlayerFound = Players:FindFirstChild(Cmd[2])
 			if not PlayerFound then
@@ -304,10 +314,16 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 		end
 		
 		if Cmd[1] == "/kill" then
+			if not Cmd[2] then
+				return
+			end
 			local FoundPlayer = Players:FindFirstChild(Cmd[2])
-			print(Cmd[2])
 			if not FoundPlayer then
 				Chat("Player Not Found Please Check If You Typed The Name Correctly")
+				return
+			end
+			if Whitelisted_Players[Cmd[2]] == true then
+				Chat("The Targeted Player Is Whitelisted You Can Not Kill Them")
 				return
 			end
 			if FoundPlayer.Team.Name == "Police" then
@@ -328,42 +344,45 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 end)
 spawn(function()
 	while true do
-		wait(1)
-		for Player, Item in pairs(LoopGive) do
-			wait(0.1)
-			local command = "give "..Player.." "..Item
-			local args = {
-				[1] = command,
-				[2] = {}
-			}
-			game:GetService("ReplicatedStorage").CmdrClient.CmdrFunction:InvokeServer(unpack(args))
-		end
+		wait(0.1)
+		spawn(function()
+			for Player, Item in pairs(LoopGive) do
+				wait(0.1)
+				local command = "give "..Player.." "..Item
+				local args = {
+					[1] = command,
+					[2] = {}
+				}
+				game:GetService("ReplicatedStorage").CmdrClient.CmdrFunction:InvokeServer(unpack(args))
+			end
 
-		for i, plr in pairs(Players:GetChildren()) do
-			wait(0.5)
-			local Character = plr.Character
+			for i, plr in pairs(Players:GetChildren()) do
+				wait(0.1)
+				local Character = plr.Character
 
-			if Character then
-				local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
-				local Humanoid = Character:FindFirstChild("Humanoid")
-				if not Humanoid or not HumanoidRootPart then return end
-				if Humanoid.Health > 0 then
+				if Character then
+					local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
+					local Humanoid = Character:FindFirstChild("Humanoid")
+					if not Humanoid or not HumanoidRootPart then return end
+					if Humanoid.Health > 0 then
 
-					if HumanoidRootPart.Position.Y > 3000 then
-						local command = "kick "..plr.Name
-						local args = {
-							[1] = command,
-							[2] = {}
-						}
-						game:GetService("ReplicatedStorage").CmdrClient.CmdrFunction:InvokeServer(unpack(args))
-						SendMessage(webhookURLs["report"], plr.Name, "ReportBot")
-						game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(plr.Name.." Has Been Kick For Suspicion Of Auto Robbing!", "All")
+						if HumanoidRootPart.Position.Y > 3000 then
+							local command = "kick "..plr.Name
+							local args = {
+								[1] = command,
+								[2] = {}
+							}
+							game:GetService("ReplicatedStorage").CmdrClient.CmdrFunction:InvokeServer(unpack(args))
+							SendMessage(webhookURLs["report"], plr.Name, "ReportBot")
+							game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(plr.Name.." Has Been Kick For Suspicion Of Auto Robbing!", "All")
+						end
+
 					end
 
 				end
-
 			end
-		end
+
+		end)
 		
 		
 
@@ -410,6 +429,7 @@ Players.PlayerRemoving:Connect(function(plr)
 			end
 		end
 	end
+	LoopGive[plr.Name]= nil
 end)
 
 local userinput = game:GetService("UserInputService")
