@@ -344,7 +344,7 @@ connection = event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 end)
 spawn(function()
 	while true do
-		wait(0.1)
+		wait(0.3)
 		local S,E = pcall(function()
 			for Player, Item in pairs(LoopGive) do
 				wait(0.1)
