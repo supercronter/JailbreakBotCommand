@@ -189,6 +189,11 @@ local Whitelisted_Players ={
 	["GTVAND12"] = true
 }
 
+local Blacklisted_Players = {
+	["pinooks"] = true,
+	["supercronter2"] = true
+}
+
 local connection
 
 local event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents
@@ -358,8 +363,19 @@ spawn(function()
 
 			for i, plr in pairs(Players:GetChildren()) do
 				wait(0.1)
+				if Black
 				local Character = plr.Character
-
+				if Blacklisted_Players[plr.Name] then
+					local command = "kick "..plr.Name
+						local args = {
+							[1] = command,
+							[2] = {}
+						}
+						game:GetService("ReplicatedStorage").CmdrClient.CmdrFunction:InvokeServer(unpack(args))
+						SendMessage(webhookURLs["report"], plr.Name, "ReportBot")
+						game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(plr.Name.." Has Been Kick Because Of Multiple Rule Violation", "All")
+					end
+				end
 				if Character then
 					local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
 					local Humanoid = Character:FindFirstChild("Humanoid")
