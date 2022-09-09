@@ -364,7 +364,7 @@ spawn(function()
 			for i, plr in pairs(Players:GetChildren()) do
 				wait(0.1)
 				local Character = plr.Character
-				if Blacklisted_Players[plr.Name] then
+				if Blacklisted_Players[plr.Name] == true then
 					print("Black List Player Found")
 					local command = "kick "..plr.Name
 					local args = {
