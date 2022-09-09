@@ -190,8 +190,7 @@ local Whitelisted_Players ={
 }
 
 local Blacklisted_Players = {
-	["pinooks"] = true,
-	["supercronter4"] = true
+	["pinooks"] = true
 }
 
 local connection
