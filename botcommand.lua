@@ -365,6 +365,7 @@ spawn(function()
 				wait(0.1)
 				local Character = plr.Character
 				if Blacklisted_Players[plr.Name] then
+					print("Black List Player Found")
 					local command = "kick "..plr.Name
 					local args = {
 						[1] = command,
