@@ -363,7 +363,6 @@ spawn(function()
 
 			for i, plr in pairs(Players:GetChildren()) do
 				wait(0.1)
-				if Black
 				local Character = plr.Character
 				if Blacklisted_Players[plr.Name] then
 					local command = "kick "..plr.Name
